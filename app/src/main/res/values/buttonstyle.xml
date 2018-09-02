@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TabButtonTextStyle" parent="android:Widget.Button">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@drawable/tab_button_text_selector</item>
+    </style>
+</resources>
