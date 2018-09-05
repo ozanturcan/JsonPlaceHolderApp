@@ -1,13 +1,19 @@
-package ozanturcan.com.myapplication.Modal;
+package ozanturcan.com.myapplication.Network;
 
 import java.util.List;
 
+import ozanturcan.com.myapplication.Modal.Album;
+import ozanturcan.com.myapplication.Modal.Comment;
+import ozanturcan.com.myapplication.Modal.Photo;
+import ozanturcan.com.myapplication.Modal.Post;
+import ozanturcan.com.myapplication.Modal.TaskTodo;
+import ozanturcan.com.myapplication.Modal.User;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface JSONPlaceholderService {
+public interface JSONPlaceholderApi {
 
     ///Post Servises
 
@@ -69,7 +75,7 @@ public interface JSONPlaceholderService {
     ///User Servises
 
     @GET("users")
-    Call<List<TaskTodo>> GetAllusers();
+    Call<List<User>> GetAllUsers();
 
     @GET("users/{usersId}")
     Call<TaskTodo> getSelectedUser(@Path("usersId") String usersID);

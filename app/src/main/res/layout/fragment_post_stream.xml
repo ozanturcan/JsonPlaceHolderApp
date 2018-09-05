@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_post_stream"
+    android:orientation="horizontal"
+    android:background="@color/colorSecondaryLight">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_feed_post"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true">
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
