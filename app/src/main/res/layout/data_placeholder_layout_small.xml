@@ -13,14 +13,13 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="120dp"
-            android:scaleType="fitCenter"
-            android:background="@color/background" />
+            android:layout_height="22dp"
+            android:background="@color/background"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="80px"
+            android:layout_height="53dp"
             android:background="@color/background"
             android:gravity="center"
             android:textSize="13sp" />

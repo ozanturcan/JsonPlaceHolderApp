@@ -6,16 +6,18 @@ import com.google.gson.annotations.SerializedName;
 public class TaskTodo {
     @SerializedName("userId")
     @Expose
-    public Integer userId;
+    private Integer userId;
     @SerializedName("id")
     @Expose
-    public Integer id;
+    private Integer id;
     @SerializedName("title")
     @Expose
-    public String title;
+    private String title;
     @SerializedName("completed")
     @Expose
-    public Boolean completed;
+    private Boolean completed;
+
+    private String userName;
 
     public Integer getUserId() {
         return userId;
@@ -47,5 +49,12 @@ public class TaskTodo {
 
     public void setCompleted(Boolean completed) {
         this.completed = completed;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

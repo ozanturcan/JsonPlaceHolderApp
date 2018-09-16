@@ -34,7 +34,7 @@ public interface JSONPlaceholderApi {
     @GET("albums/{AlbumID}")
     Call<Comment> getSelectedComment(@Path("CommentID") String CommentID);
 
-    @GET("albums")
+    @GET("comments")
     Call<List<Comment>> getCommentsFromPostID(@Query("postId") String postID);
 
     ///Album Servises

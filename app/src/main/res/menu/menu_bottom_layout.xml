@@ -4,15 +4,15 @@
     <item
         android:id="@+id/menu_button1"
         android:icon="@drawable/tab_button1_selector"
-        android:title="Button1" />
+        android:title="Album" />
 
     <item
         android:id="@+id/menu_button2"
         android:icon="@drawable/tab_button2_selector"
-        android:title="Button2" />
+        android:title="Post" />
 
     <item
         android:id="@+id/menu_button3"
         android:icon="@drawable/tab_button3_selector"
-        android:title="Button3" />
+        android:title="Todo" />
 </menu>

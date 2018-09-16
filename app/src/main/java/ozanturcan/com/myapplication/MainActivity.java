@@ -1,7 +1,7 @@
 package ozanturcan.com.myapplication;
 
 
-import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.stfalcon.bottomtablayout.BottomTabLayout;
@@ -29,19 +29,22 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void switchFragment(int id) {
-        final FragmentManager fragmentManager = getFragmentManager();
+        final FragmentTransaction transaction  = getFragmentManager().beginTransaction();
 
         switch (id) {
             case R.id.menu_button1:
-                fragmentManager.beginTransaction().replace(R.id.container, new AlbumStreamFragment()).commit();
+                transaction.replace(R.id.container, new AlbumStreamFragment()).commit();
+                transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
                 getSupportActionBar().setTitle("Album Stream");
                 break;
             case R.id.menu_button2:
-                fragmentManager.beginTransaction().replace(R.id.container, new PostStreamFragment()).commit();
+                transaction.replace(R.id.container, new PostStreamFragment()).commit();
+                transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
                 getSupportActionBar().setTitle("Post Stream");
                 break;
             case R.id.menu_button3:
-                fragmentManager.beginTransaction().replace(R.id.container, new TodoStreamFragment()).commit();
+                transaction.replace(R.id.container, new TodoStreamFragment()).commit();
+                transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
                 getSupportActionBar().setTitle("Todo Stream");
                 break;
 

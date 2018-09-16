@@ -24,10 +24,6 @@ import ozanturcan.com.myapplication.Views.CustomItemClickListener;
 public class RecyclerViewAdapterAlbum extends RecyclerView.Adapter<RecyclerViewAdapterAlbum.ViewHolder> {
     CustomItemClickListener listener;
     private List<Album> albumList;
-    private boolean loading;
-
-    private OnLoadMoreListener onLoadMoreListener;
-
     public RecyclerViewAdapterAlbum(List<Album> albumList, CustomItemClickListener listener) {
         this.albumList = albumList;
         this.listener = listener;
@@ -72,20 +68,8 @@ public class RecyclerViewAdapterAlbum extends RecyclerView.Adapter<RecyclerViewA
         }
     }
 
-    public void setLoad() {
-        loading = false;
-    }
-
-    public void setOnLoadMoreListener(OnLoadMoreListener onLoadMoreListener) {
-        this.onLoadMoreListener = onLoadMoreListener;
-    }
-
     public interface OnLoadMoreListener {
         void onLoadMore();
-    }
-
-    public void setLoaded() {
-        loading = false;
     }
 
     public void clear() {

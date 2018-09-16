@@ -15,9 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import ozanturcan.com.myapplication.Adapter.RecyclerViewAdapterPhotoDetail;
-import ozanturcan.com.myapplication.Modal.ObservableObjects.AlbumObservable;
-import ozanturcan.com.myapplication.Modal.Photo;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.PhotosObservable;
+import ozanturcan.com.myapplication.Modal.Photo;
 import ozanturcan.com.myapplication.Network.RetrofitCallOperation;
 import ozanturcan.com.myapplication.R;
 
@@ -47,18 +46,19 @@ public class PhotoStreamFragment extends Fragment implements Observer {
 
     @Override
     public void onResume() {
+        shimmerEffectAction();
         super.onResume();
-        shimmerFrameLayout.startShimmerAnimation();
     }
 
     @Override
     public void onPause() {
-        shimmerFrameLayout.stopShimmerAnimation();
+        shimmerEffectAction();
         super.onPause();
     }
 
     @Override
     public void onDestroyView() {
+        shimmerEffectAction();
         super.onDestroyView();
     }
 
@@ -71,10 +71,18 @@ public class PhotoStreamFragment extends Fragment implements Observer {
     @Override
     public void update(Observable observable, Object o) {
         if (observable != null && observable instanceof PhotosObservable) {
-            /* Typecast to UserRepository */
-            AlbumObservable userRepository = (AlbumObservable) observable;
+            PhotosObservable userRepository = (PhotosObservable) observable;
             fillAlbums(RootView.getContext(), photosObservable);
+            shimmerEffectAction();
+        }
+    }
+
+    private void shimmerEffectAction() {
+        if (photosObservable != null && photosObservable.getPhotoList() != null) {
             shimmerFrameLayout.stopShimmerAnimation();
+            shimmerFrameLayout.setVisibility(View.GONE);
+        } else {
+            shimmerFrameLayout.startShimmerAnimation();
         }
     }
 }

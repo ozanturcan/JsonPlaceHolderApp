@@ -33,7 +33,7 @@ public class PostObservable extends Observable {
         userList = userObservable.getUserList();
         for (Post post : postList) {
             for (User user : userList) {
-                if (post.userId == user.id) {
+                if (post.getUserId() == user.id) {
                     post.userName = user.name;
                     break;
                 }
@@ -46,7 +46,7 @@ public class PostObservable extends Observable {
         for (Post post : postList) {
             int count = 0;
             for (Comment comment : commentList) {
-                if (post.id == comment.postId) {
+                if (post.getId() == comment.postId) {
                     count++;
                 }
             }

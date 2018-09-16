@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="3dp"
-    cardview:cardCornerRadius="4dp">
+    android:padding="3dp"
+    cardview:cardCornerRadius="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_margin="3dp">
 
         <ImageView
+            android:id="@+id/photo_thumb_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="120dp"
-            android:scaleType="fitCenter"
-            android:background="@color/background" />
+            android:scaleType="fitCenter" />
 
         <TextView
+            android:id="@+id/photo_title_id"
             android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:background="@color/background"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="13sp" />
+            android:text="Photo Title"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="13sp"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

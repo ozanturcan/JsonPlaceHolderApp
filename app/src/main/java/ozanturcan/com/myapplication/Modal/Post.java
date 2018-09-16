@@ -6,18 +6,18 @@ import com.google.gson.annotations.SerializedName;
 public class Post {
     @SerializedName("userId")
     @Expose
-    public Integer userId;
+    private Integer userId;
     @SerializedName("id")
     @Expose
-    public Integer id;
+    private Integer id;
     @SerializedName("title")
     @Expose
-    public String title;
+    private String title;
     @SerializedName("body")
     @Expose
-    public String body;
+    private String body;
 
-    public Number commentCount;
+    private Number commentCount;
 
     public Number getCommentCount() {
         return commentCount;

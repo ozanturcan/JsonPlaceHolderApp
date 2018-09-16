@@ -7,10 +7,12 @@ import ozanturcan.com.myapplication.Modal.Album;
 import ozanturcan.com.myapplication.Modal.Comment;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.AlbumObservable;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.CommentObservable;
+import ozanturcan.com.myapplication.Modal.ObservableObjects.TodoObervable;
 import ozanturcan.com.myapplication.Modal.Photo;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.PhotosObservable;
 import ozanturcan.com.myapplication.Modal.Post;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.PostObservable;
+import ozanturcan.com.myapplication.Modal.TaskTodo;
 import ozanturcan.com.myapplication.Modal.User;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.UserObservable;
 import retrofit2.Call;
@@ -24,7 +26,7 @@ public class RetrofitCallOperation {
     PostObservable postObservable = PostObservable.getInstance();
     UserObservable userObservable = UserObservable.getInstance();
     CommentObservable commentObservable = CommentObservable.getInstance();
-
+    TodoObervable todoObervable = TodoObervable.getInstance();
     private void getPhoto() {
         Call<List<Photo>> call = service.GetAllPhotos();
         call.enqueue(new Callback<List<Photo>>() {
@@ -32,7 +34,7 @@ public class RetrofitCallOperation {
             public void onResponse(Call<List<Photo>> call, Response<List<Photo>> response) {
                 if (response.isSuccessful()) {
                     if (response.code() == 200) {
-                        if (checkRespons(response)) {
+                        if (checkResponse(response)) {
                             albumOperation.setPhotoList(response.body());
                         }
                     }
@@ -52,7 +54,7 @@ public class RetrofitCallOperation {
         call.enqueue(new Callback<List<Album>>() {
             @Override
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
-                if (checkRespons(response)) {
+                if (checkResponse(response)) {
                     albumOperation.setAlbumList(response.body());
                     getPhoto();
                 }
@@ -71,7 +73,7 @@ public class RetrofitCallOperation {
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                if (checkRespons(response)) {
+                if (checkResponse(response)) {
                     postObservable.setPostList(response.body());
                 }
             }
@@ -89,7 +91,7 @@ public class RetrofitCallOperation {
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                if (checkRespons(response)) {
+                if (checkResponse(response)) {
                     userObservable.setUserList(response.body());
                 }
             }
@@ -107,7 +109,7 @@ public class RetrofitCallOperation {
         call.enqueue(new Callback<List<Comment>>() {
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
-                if (checkRespons(response)) {
+                if (checkResponse(response)) {
                     commentObservable.setCommentList(response.body());
                 }
             }
@@ -119,12 +121,30 @@ public class RetrofitCallOperation {
         });
     }
 
+    public void getTodo() {
+
+        Call<List<TaskTodo>> call = service.GetAllTaskTodo();
+        call.enqueue(new Callback<List<TaskTodo>>() {
+            @Override
+            public void onResponse(Call<List<TaskTodo>> call, Response<List<TaskTodo>> response) {
+                if (checkResponse(response)) {
+                    todoObervable.setTaskTodoList(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<TaskTodo>> call, Throwable t) {
+//                Toast.makeText(getContext(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public void getPhotoListFromAlbum(String albumID) {
         Call<List<Photo>> call = service.getPhotosFromAlbum(albumID);
         call.enqueue(new Callback<List<Photo>>() {
             @Override
             public void onResponse(Call<List<Photo>> call, Response<List<Photo>> response) {
-                if (checkRespons(response)) {
+                if (checkResponse(response)) {
                     photosObservable.setPhotoList(response.body());
                 }
             }
@@ -141,7 +161,7 @@ public class RetrofitCallOperation {
         call.enqueue(new Callback<List<Comment>>() {
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
-                if (checkRespons(response)) {
+                if (checkResponse(response)) {
                     commentObservable.setCommentList(response.body());
                 }
             }
@@ -153,7 +173,7 @@ public class RetrofitCallOperation {
         });
     }
 
-    private boolean checkRespons(@NonNull Response response) {
+    private boolean checkResponse(@NonNull Response response) {
         boolean result = false;
         if (response.isSuccessful()) {
             if (response.code() == 200) {

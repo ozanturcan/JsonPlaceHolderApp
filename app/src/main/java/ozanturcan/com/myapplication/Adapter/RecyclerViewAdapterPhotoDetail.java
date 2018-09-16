@@ -38,13 +38,12 @@ public class RecyclerViewAdapterPhotoDetail extends RecyclerView.Adapter<Recycle
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         LayoutInflater mInflater = LayoutInflater.from(parent.getContext());
-        view = mInflater.inflate(R.layout.cardview_item_holder,parent,false);
+        view = mInflater.inflate(R.layout.cardview_item_holder_photo,parent,false);
         return new ViewHolder(view);
     }
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.ph_title.setText(photoList.get(position).getTitle());
-//        holder.ph_thumbnail_img.setImageURI( GetImageBitmapFromUrl(photoList.get(position).getUrlM()));
         Glide.with(holder.cardView.getContext().getApplicationContext()).load(photoList.get(position).getUrl()).into(holder.ph_thumbnail_img);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,21 +75,27 @@ public class RecyclerViewAdapterPhotoDetail extends RecyclerView.Adapter<Recycle
             cardView  = (CardView) itemView.findViewById(R.id.cardview_id);
         }
     }
-    public void setLoad(){
+
+    public void setLoad() {
         loading = false;
     }
-    public void setOnLoadMoreListener(OnLoadMoreListener onLoadMoreListener){
+
+    public void setOnLoadMoreListener(OnLoadMoreListener onLoadMoreListener) {
         this.onLoadMoreListener = onLoadMoreListener;
     }
+
     public interface OnLoadMoreListener {
         void onLoadMore();
     }
+
     public void setLoaded() {
         loading = false;
     }
+
     public void clear() {
         notifyDataSetChanged();
     }
+
     // Add a list of items -- change to type used
     public void addAll() {
         notifyDataSetChanged();
