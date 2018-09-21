@@ -4,7 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import ozanturcan.com.myapplication.Modal.TaskTodo;
 
 public class SharedPreferenceUtilities {
     private SharedPreferences preferences;
@@ -42,13 +48,22 @@ public class SharedPreferenceUtilities {
         String stringValue = preferences.getString(stringKey, null);
         return stringValue;
     }
+    public void setTasksToSharedPrefs(List<TaskTodo> todoObervables) {
+        preferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        SharedPreferences.Editor prefsEditor = preferences.edit();
 
-    public List<String> getSharedValueList() {
-        return sharedValueList;
+        Gson gson = new Gson();
+        String json = gson.toJson(todoObervables);
+        prefsEditor.putString("currentTasks", json);
+        prefsEditor.commit();
     }
+    public List<TaskTodo> getTasksFromSharedPrefs() {
+        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
 
-    public void saveSharedValueList() {
-        preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        String json = appSharedPrefs.getString("currentTasks", "");
+        List<TaskTodo> tasks = gson.fromJson(json, new TypeToken<ArrayList<TaskTodo>>() {
+        }.getType());
+        return tasks;
     }
 }

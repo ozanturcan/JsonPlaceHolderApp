@@ -22,29 +22,27 @@ import ozanturcan.com.myapplication.R;
  * Created by Legend on 10.05.2018.
  */
 
-public class RecyclerViewAdapterPhotoDetail extends RecyclerView.Adapter<RecyclerViewAdapterPhotoDetail.ViewHolder> {
+public class PhotoRVAdapter extends RecyclerView.Adapter<PhotoRVAdapter.ViewHolder> {
 
     private List<Photo> photoList;
-    private boolean loading;
-    private int visibleThreshold = 5;
-    private int lastVisibleItem, totalItemCount;
 
-    private OnLoadMoreListener onLoadMoreListener;
-    public RecyclerViewAdapterPhotoDetail(List<Photo> photoList) {
+    public PhotoRVAdapter(List<Photo> photoList) {
         this.photoList = photoList;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         LayoutInflater mInflater = LayoutInflater.from(parent.getContext());
-        view = mInflater.inflate(R.layout.cardview_item_holder_photo,parent,false);
+        view = mInflater.inflate(R.layout.cardview_item_holder_photo, parent, false);
         return new ViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.ph_title.setText(photoList.get(position).getTitle());
-        Glide.with(holder.cardView.getContext().getApplicationContext()).load(photoList.get(position).getUrl()).into(holder.ph_thumbnail_img);
+        holder.textView_title.setText(photoList.get(position).getTitle());
+        Glide.with(holder.cardView.getContext().getApplicationContext()).load(photoList.get(position).getUrl()).into(holder.imageView_photo);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,44 +58,27 @@ public class RecyclerViewAdapterPhotoDetail extends RecyclerView.Adapter<Recycle
             }
         });
     }
+
     @Override
     public int getItemCount() {
         return photoList.size();
     }
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView ph_title;
-        ImageView ph_thumbnail_img;
-        CardView cardView ;
-        public ViewHolder(View ItemView){
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView textView_title;
+        ImageView imageView_photo;
+        CardView cardView;
+
+        ViewHolder(View ItemView) {
             super(ItemView);
-            ph_title = (TextView) itemView.findViewById(R.id.photo_title_id);
-            ph_thumbnail_img = (ImageView) itemView.findViewById(R.id.photo_thumb_id);
-            cardView  = (CardView) itemView.findViewById(R.id.cardview_id);
+            textView_title = (TextView) itemView.findViewById(R.id.photo_title_id);
+            imageView_photo = (ImageView) itemView.findViewById(R.id.photo_thumb_id);
+            cardView = (CardView) itemView.findViewById(R.id.cardview_id);
         }
     }
 
-    public void setLoad() {
-        loading = false;
-    }
-
-    public void setOnLoadMoreListener(OnLoadMoreListener onLoadMoreListener) {
-        this.onLoadMoreListener = onLoadMoreListener;
-    }
-
-    public interface OnLoadMoreListener {
-        void onLoadMore();
-    }
-
-    public void setLoaded() {
-        loading = false;
-    }
 
     public void clear() {
-        notifyDataSetChanged();
-    }
-
-    // Add a list of items -- change to type used
-    public void addAll() {
         notifyDataSetChanged();
     }
 }

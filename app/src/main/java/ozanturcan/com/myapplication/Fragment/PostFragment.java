@@ -14,16 +14,16 @@ import java.util.Observer;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import ozanturcan.com.myapplication.Adapter.RecyclerViewAdapterPost;
+import ozanturcan.com.myapplication.Adapter.PostRVAdapter;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.PostObservable;
 import ozanturcan.com.myapplication.Modal.Post;
 import ozanturcan.com.myapplication.Network.RetrofitCallOperation;
 import ozanturcan.com.myapplication.R;
-import ozanturcan.com.myapplication.Views.CustomItemClickListener;
+import ozanturcan.com.myapplication.Listener.CustomItemClickListener;
 
-public class PostStreamFragment extends Fragment implements Observer {
+public class PostFragment extends Fragment implements Observer {
     private RecyclerView recyclerviewFeed;
-    private RecyclerViewAdapterPost recyclerViewAdapter;
+    private PostRVAdapter recyclerViewAdapter;
     private View RootView;
     private PostObservable postObservable;
     private RetrofitCallOperation retrofitCallOperation = new RetrofitCallOperation();
@@ -67,10 +67,10 @@ public class PostStreamFragment extends Fragment implements Observer {
 
     public void fillPost(final Context context, PostObservable lstPost) {
         recyclerviewFeed.setAdapter(recyclerViewAdapter);
-        recyclerViewAdapter  = new RecyclerViewAdapterPost(lstPost.getPostList(), new CustomItemClickListener() {
+        recyclerViewAdapter  = new PostRVAdapter(lstPost.getPostList(), new CustomItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                PostDetailFragment postDetailFragment = new PostDetailFragment();
+                CommentFragment postDetailFragment = new CommentFragment();
                 postDetailFragment.setArguments(moveToPostDetail(postObservable.getPostList().get(position)));
                 FragmentTransaction transaction  = getFragmentManager().beginTransaction();
 

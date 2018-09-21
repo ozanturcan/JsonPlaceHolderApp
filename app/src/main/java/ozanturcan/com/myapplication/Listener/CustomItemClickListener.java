@@ -1,4 +1,4 @@
-package ozanturcan.com.myapplication.Views;
+package ozanturcan.com.myapplication.Listener;
 
 import android.view.View;
 

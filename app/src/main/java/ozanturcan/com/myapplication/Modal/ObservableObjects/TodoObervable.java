@@ -38,17 +38,6 @@ public class TodoObervable extends Observable {
         notifyObservers();
     }
 
-    public List<User> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
-        mergerUserFromTodo();
-        setChanged();
-        notifyObservers();
-    }
-
     private void mergerUserFromTodo() {
         userList = userObservable.getUserList();
         for (TaskTodo task : taskTodoList) {

@@ -121,7 +121,7 @@ public class RetrofitCallOperation {
         });
     }
 
-    public void getTodo() {
+    public void getTasks() {
 
         Call<List<TaskTodo>> call = service.GetAllTaskTodo();
         call.enqueue(new Callback<List<TaskTodo>>() {

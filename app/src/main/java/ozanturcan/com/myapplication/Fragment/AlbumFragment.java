@@ -16,15 +16,15 @@ import java.util.Observer;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import ozanturcan.com.myapplication.Adapter.RecyclerViewAdapterAlbum;
+import ozanturcan.com.myapplication.Adapter.AlbumRVAdapter;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.AlbumObservable;
 import ozanturcan.com.myapplication.Network.RetrofitCallOperation;
 import ozanturcan.com.myapplication.R;
-import ozanturcan.com.myapplication.Views.CustomItemClickListener;
+import ozanturcan.com.myapplication.Listener.CustomItemClickListener;
 
-public class AlbumStreamFragment extends Fragment implements Observer {
-    private RecyclerView recyclerviewFeed;
-    private RecyclerViewAdapterAlbum recyclerViewAdapter;
+public class AlbumFragment extends Fragment implements Observer {
+    private RecyclerView recyclerViewAlbum;
+    private AlbumRVAdapter rvAdapter;
     private ShimmerFrameLayout shimmerFrameLayout;
     private View RootView;
     private AlbumObservable albumObservable;
@@ -36,8 +36,8 @@ public class AlbumStreamFragment extends Fragment implements Observer {
 
         RootView = inflater.inflate(R.layout.fragment_album_stream, container, false);
         shimmerFrameLayout = RootView.findViewById(R.id.shimmer_view_container_album);
-        recyclerviewFeed = (RecyclerView) RootView.findViewById(R.id.recyclerview_feed_album);
-        recyclerviewFeed.setLayoutManager(new GridLayoutManager(RootView.getContext(), 3));
+        recyclerViewAlbum = (RecyclerView) RootView.findViewById(R.id.recyclerview_feed_album);
+        recyclerViewAlbum.setLayoutManager(new GridLayoutManager(RootView.getContext(), 3));
 
         albumObservable = AlbumObservable.getInstance();
         albumObservable.addObserver(this);
@@ -69,18 +69,18 @@ public class AlbumStreamFragment extends Fragment implements Observer {
     }
 
     public void fillAlbums(final Context context, AlbumObservable lstAlbum) {
-        recyclerviewFeed.setAdapter(recyclerViewAdapter);
-        recyclerViewAdapter = new RecyclerViewAdapterAlbum(lstAlbum.getAlbumList(), new CustomItemClickListener() {
+        recyclerViewAlbum.setAdapter(rvAdapter);
+        rvAdapter = new AlbumRVAdapter(lstAlbum.getAlbumList(), new CustomItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 Toast.makeText(context, "Clicked Item: " + position, Toast.LENGTH_SHORT).show();
                 retrofitCallOperation.getPhotoListFromAlbum(albumObservable.getAlbumList().get(position).getId().toString());
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                PhotoStreamFragment myFragment = new PhotoStreamFragment();
+                PhotoFragment myFragment = new PhotoFragment();
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.relativeLayout_album, myFragment).addToBackStack(null).commit();
             }
         });
-        recyclerviewFeed.setAdapter(recyclerViewAdapter);
+        recyclerViewAlbum.setAdapter(rvAdapter);
     }
 
 

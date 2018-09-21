@@ -7,9 +7,9 @@ import android.os.Bundle;
 import com.stfalcon.bottomtablayout.BottomTabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import ozanturcan.com.myapplication.Fragment.AlbumStreamFragment;
-import ozanturcan.com.myapplication.Fragment.PostStreamFragment;
-import ozanturcan.com.myapplication.Fragment.TodoStreamFragment;
+import ozanturcan.com.myapplication.Fragment.AlbumFragment;
+import ozanturcan.com.myapplication.Fragment.PostFragment;
+import ozanturcan.com.myapplication.Fragment.TaskFragment;
 import ozanturcan.com.myapplication.Network.RetrofitCallOperation;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,17 +33,17 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.menu_button1:
-                transaction.replace(R.id.container, new AlbumStreamFragment()).commit();
+                transaction.replace(R.id.container, new AlbumFragment()).commit();
                 transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
                 getSupportActionBar().setTitle("Album Stream");
                 break;
             case R.id.menu_button2:
-                transaction.replace(R.id.container, new PostStreamFragment()).commit();
+                transaction.replace(R.id.container, new PostFragment()).commit();
                 transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
                 getSupportActionBar().setTitle("Post Stream");
                 break;
             case R.id.menu_button3:
-                transaction.replace(R.id.container, new TodoStreamFragment()).commit();
+                transaction.replace(R.id.container, new TaskFragment()).commit();
                 transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
                 getSupportActionBar().setTitle("Todo Stream");
                 break;

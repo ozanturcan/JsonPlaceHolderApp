@@ -12,14 +12,14 @@ import java.util.Observer;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import ozanturcan.com.myapplication.Adapter.RecyclerViewAdapterPostDetail;
+import ozanturcan.com.myapplication.Adapter.CommentRVAdapter;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.CommentObservable;
 import ozanturcan.com.myapplication.R;
 import ozanturcan.com.myapplication.Util.StringUtilities;
 
-public class PostDetailFragment extends Fragment implements Observer {
+public class CommentFragment extends Fragment implements Observer {
     private RecyclerView recyclerviewFeed;
-    private RecyclerViewAdapterPostDetail recyclerViewAdapter;
+    private CommentRVAdapter recyclerViewAdapter;
     private View RootView;
     private CommentObservable commentObservable;
     private TextView textViewUsername;
@@ -57,7 +57,7 @@ public class PostDetailFragment extends Fragment implements Observer {
     }
 
     public void fillComment(CommentObservable commentObservable) {
-        recyclerViewAdapter = new RecyclerViewAdapterPostDetail(commentObservable.getCommentList());
+        recyclerViewAdapter = new CommentRVAdapter(commentObservable.getCommentList());
         recyclerviewFeed.setAdapter(recyclerViewAdapter);
 
     }

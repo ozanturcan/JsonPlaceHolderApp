@@ -11,20 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import ozanturcan.com.myapplication.Modal.Post;
 import ozanturcan.com.myapplication.R;
-import ozanturcan.com.myapplication.Views.CustomItemClickListener;
+import ozanturcan.com.myapplication.Listener.CustomItemClickListener;
 
 /**
  * Created by Legend on 10.05.2018.
  */
 
-public class RecyclerViewAdapterPost extends RecyclerView.Adapter<RecyclerViewAdapterPost.ViewHolder> {
+public class PostRVAdapter extends RecyclerView.Adapter<PostRVAdapter.ViewHolder> {
     CustomItemClickListener listener;
     private List<Post> postList;
-    private boolean loading;
 
-    private OnLoadMoreListener onLoadMoreListener;
-
-    public RecyclerViewAdapterPost(List<Post> postList, CustomItemClickListener listener) {
+    public PostRVAdapter(List<Post> postList, CustomItemClickListener listener) {
         this.postList = postList;
         this.listener = listener;
     }
@@ -62,6 +59,7 @@ public class RecyclerViewAdapterPost extends RecyclerView.Adapter<RecyclerViewAd
         TextView textView_username;
         TextView textView_description;
         TextView textBoxTextViewCount;
+
         public ViewHolder(View ItemView) {
             super(ItemView);
             photo_title_id = (TextView) itemView.findViewById(R.id.textView_title);
@@ -71,28 +69,8 @@ public class RecyclerViewAdapterPost extends RecyclerView.Adapter<RecyclerViewAd
         }
     }
 
-    public void setLoad() {
-        loading = false;
-    }
-
-    public void setOnLoadMoreListener(OnLoadMoreListener onLoadMoreListener) {
-        this.onLoadMoreListener = onLoadMoreListener;
-    }
-
-    public interface OnLoadMoreListener {
-        void onLoadMore();
-    }
-
-    public void setLoaded() {
-        loading = false;
-    }
-
     public void clear() {
         notifyDataSetChanged();
     }
 
-    // Add a list of items -- change to type used
-    public void addAll() {
-        notifyDataSetChanged();
-    }
 }
