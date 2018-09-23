@@ -29,7 +29,7 @@ public class AlbumRVAdapter extends RecyclerView.Adapter<AlbumRVAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item_holder, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item_holder_album, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
 
         view.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +44,7 @@ public class AlbumRVAdapter extends RecyclerView.Adapter<AlbumRVAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.textView_title.setText(albumList.get(position).getTitle());
-        Glide.with(holder.cardView.getContext()).load(albumList.get(position).getAlbumPhoto().getUrl()).into(holder.imageView_photo);
+        Glide.with(holder.cardView.getContext()).load(albumList.get(position).getAlbumPhoto().getThumbnailUrl()).into(holder.imageView_photo);
     }
 
     @Override
@@ -59,9 +59,9 @@ public class AlbumRVAdapter extends RecyclerView.Adapter<AlbumRVAdapter.ViewHold
 
         ViewHolder(View ItemView) {
             super(ItemView);
-            textView_title = (TextView) itemView.findViewById(R.id.photo_title_id);
-            imageView_photo = (ImageView) itemView.findViewById(R.id.photo_thumb_id);
-            cardView = (CardView) itemView.findViewById(R.id.cardview_id);
+            textView_title = (TextView) itemView.findViewById(R.id.album_title);
+            imageView_photo = (ImageView) itemView.findViewById(R.id.album_photo);
+            cardView = (CardView) itemView.findViewById(R.id.cardview_album);
         }
     }
 

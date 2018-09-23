@@ -71,9 +71,9 @@ public class PhotoRVAdapter extends RecyclerView.Adapter<PhotoRVAdapter.ViewHold
 
         ViewHolder(View ItemView) {
             super(ItemView);
-            textView_title = (TextView) itemView.findViewById(R.id.photo_title_id);
-            imageView_photo = (ImageView) itemView.findViewById(R.id.photo_thumb_id);
-            cardView = (CardView) itemView.findViewById(R.id.cardview_id);
+            textView_title = (TextView) itemView.findViewById(R.id.photo_title);
+            imageView_photo = (ImageView) itemView.findViewById(R.id.photo_thumb_img);
+            cardView = (CardView) itemView.findViewById(R.id.cardview_photo);
         }
     }
 

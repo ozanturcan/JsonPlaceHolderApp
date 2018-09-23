@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
-    cardview:cardCornerRadius="4dp">
+    cardview:cardCornerRadius="@dimen/cardViewRadius">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#c4ffffff"
-        android:padding="10dp">
+        android:background="@color/dirtyWhite"
+        android:padding="@dimen/padding_10">
 
         <TextView
             android:id="@+id/textView_title"
@@ -20,11 +20,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
             android:text="Title"
             android:textColor="@color/textOnPrimary"
-            android:textSize="16dp"
+            android:textSize="@dimen/cardViewTitleTextHeight"
             android:textStyle="bold" />
 
         <TextView
@@ -34,9 +32,9 @@
             android:layout_below="@+id/textView_title"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="18dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="22dp"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:maxLines="4"
             android:text="TextView"
             android:textColor="@color/textOnPrimary" />
@@ -47,8 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_description"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_vertical_margin"
             android:text="TextView"
             android:textColor="@color/textOnPrimary"
             android:textStyle="bold" />
@@ -58,8 +56,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_description"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_vertical_margin"
             android:layout_toStartOf="@+id/textView_username"
             android:text="TextView"
             android:textColor="@color/textOnPrimary" />

@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginTop="3dp"
     android:orientation="vertical"
     shimmer:duration="800">
 
@@ -13,8 +12,9 @@
         android:id="@+id/shimmer_view_container_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:orientation="vertical"
         shimmer:duration="800">
 
@@ -46,5 +46,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_alignParentTop="true" />
 </RelativeLayout>

@@ -35,17 +35,17 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_button1:
                 transaction.replace(R.id.container, new AlbumFragment()).commit();
                 transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
-                getSupportActionBar().setTitle("Album Stream");
+                getSupportActionBar().setTitle("Albums");
                 break;
             case R.id.menu_button2:
                 transaction.replace(R.id.container, new PostFragment()).commit();
                 transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
-                getSupportActionBar().setTitle("Post Stream");
+                getSupportActionBar().setTitle("Posts");
                 break;
             case R.id.menu_button3:
                 transaction.replace(R.id.container, new TaskFragment()).commit();
                 transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
-                getSupportActionBar().setTitle("Todo Stream");
+                getSupportActionBar().setTitle("Todos");
                 break;
 
         }
