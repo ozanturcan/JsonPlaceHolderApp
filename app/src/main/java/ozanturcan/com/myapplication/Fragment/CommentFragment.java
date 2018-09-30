@@ -1,6 +1,5 @@
 package ozanturcan.com.myapplication.Fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +16,10 @@ import ozanturcan.com.myapplication.Modal.ObservableObjects.CommentObservable;
 import ozanturcan.com.myapplication.R;
 import ozanturcan.com.myapplication.Util.StringUtilities;
 
-public class CommentFragment extends Fragment implements Observer {
+public class CommentFragment extends BaseFragment implements Observer {
     private RecyclerView recyclerviewFeed;
     private CommentRVAdapter recyclerViewAdapter;
-    private View RootView;
+    private View rootView;
     private CommentObservable commentObservable;
     private TextView textViewUsername;
     private TextView textViewCount;
@@ -31,22 +30,22 @@ public class CommentFragment extends Fragment implements Observer {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        RootView = inflater.inflate(R.layout.fragment_post_detail, container, false);
-
-        View includeView = RootView.findViewById(R.id.cardview_post_main);
+        rootView = inflater.inflate(R.layout.fragment_post_detail, container, false);
+        rootView.findViewById(R.id.loading_album).setVisibility(View.VISIBLE);
+        View includeView = rootView.findViewById(R.id.cardview_post_main);
         textViewUsername = includeView.findViewById(R.id.textView_username);
         textViewCount = includeView.findViewById(R.id.textView_count);
         textViewBody = includeView.findViewById(R.id.textView_description);
         textViewTitle = includeView.findViewById(R.id.textView_title);
 
 
-        recyclerviewFeed = (RecyclerView) RootView.findViewById(R.id.recyclerview_feed_post_detail);
-        recyclerviewFeed.setLayoutManager(new GridLayoutManager(RootView.getContext(), 1));
+        recyclerviewFeed = (RecyclerView) rootView.findViewById(R.id.recyclerview_feed_post_detail);
+        recyclerviewFeed.setLayoutManager(new GridLayoutManager(rootView.getContext(), 1));
         commentObservable = CommentObservable.getInstance();
         commentObservable.addObserver(this);
 
         fillCardView();
-        return RootView;
+        return rootView;
     }
 
     private void fillCardView() {
@@ -59,6 +58,8 @@ public class CommentFragment extends Fragment implements Observer {
     public void fillComment(CommentObservable commentObservable) {
         recyclerViewAdapter = new CommentRVAdapter(commentObservable.getCommentList());
         recyclerviewFeed.setAdapter(recyclerViewAdapter);
+        rootView.findViewById(R.id.loading_album).setVisibility(View.GONE);
+        commentObservable.deleteObserver(this);
 
     }
 
@@ -67,5 +68,13 @@ public class CommentFragment extends Fragment implements Observer {
         if (observable != null && observable instanceof CommentObservable) {
             fillComment(commentObservable);
         }
+    }
+    @Override
+    public void checkConnection() {
+        super.checkConnection();
+    }
+
+    private void getCommentsFunction(){
+
     }
 }

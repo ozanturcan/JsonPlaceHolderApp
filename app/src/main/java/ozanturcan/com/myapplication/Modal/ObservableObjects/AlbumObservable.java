@@ -32,10 +32,6 @@ public class AlbumObservable extends Observable {
         this.albumList = albumList;
     }
 
-    public List<Photo> getPhotoList() {
-        return photoList;
-    }
-
     public void setPhotoList(List<Photo> photoList) {
         this.photoList = photoList;
         mergePhotosToAlbum();

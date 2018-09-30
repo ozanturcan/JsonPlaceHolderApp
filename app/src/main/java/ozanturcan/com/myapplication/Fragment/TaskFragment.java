@@ -1,6 +1,5 @@
 package ozanturcan.com.myapplication.Fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,32 +18,23 @@ import ozanturcan.com.myapplication.Network.RetrofitCallOperation;
 import ozanturcan.com.myapplication.R;
 import ozanturcan.com.myapplication.Util.SharedPreferenceUtilities;
 
-public class TaskFragment extends Fragment implements Observer, TaskRVAdapter.CustomItemCheckListener, TaskRVAdapter.CustomItemUnCheckListener {
+public class TaskFragment extends BaseFragment implements Observer, TaskRVAdapter.CustomItemCheckListener, TaskRVAdapter.CustomItemUnCheckListener {
     private RecyclerView recyclerView;
     private TodoObervable todoObervable;
     private RetrofitCallOperation retrofitCallOperation = new RetrofitCallOperation();
     private SharedPreferenceUtilities preferenceUtilities;
     private List<TaskTodo> taskTodoList;
+    private View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_todo_stream, container, false);
+        rootView = inflater.inflate(R.layout.fragment_todo_stream, container, false);
         recyclerView = rootView.findViewById(R.id.recyclerview_feed_todo);
+        rootView.findViewById(R.id.loading_album).setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new GridLayoutManager(rootView.getContext(), 1));
-        preferenceUtilities = new SharedPreferenceUtilities(rootView.getContext());
-        taskTodoList = preferenceUtilities.getTasksFromSharedPrefs();
-        todoObervable = TodoObervable.getInstance();
-        todoObervable.addObserver(this);
-        if (todoObervable.getTaskTodoList() == null && taskTodoList == null) {
-            retrofitCallOperation.getTasks();
-        } else if (taskTodoList != null) {
-            fillTask(taskTodoList);
-            todoObervable.setTaskTodoList(taskTodoList);
-        } else {
-            fillTask(todoObervable.getTaskTodoList());
-        }
+        checkConnection();
         return rootView;
     }
 
@@ -53,6 +43,9 @@ public class TaskFragment extends Fragment implements Observer, TaskRVAdapter.Cu
         recyclerView.setAdapter(taskRVAdapter);
         taskRVAdapter.setCheckListener(this);
         taskRVAdapter.setUnCheckListener(this);
+        rootView.findViewById(R.id.loading_album).setVisibility(View.GONE);
+        todoObervable.deleteObserver(this);
+
     }
 
     @Override
@@ -78,5 +71,28 @@ public class TaskFragment extends Fragment implements Observer, TaskRVAdapter.Cu
         taskTodoList.get(position).setCompleted(false);
         preferenceUtilities.setTasksToSharedPrefs(taskTodoList);
 
+    }
+
+    @Override
+    public void checkConnection() {
+        super.checkConnection();
+        if (isOnline()) {
+            getTaskFunction();
+        }
+    }
+
+    private void getTaskFunction() {
+        preferenceUtilities = new SharedPreferenceUtilities(rootView.getContext());
+        taskTodoList = preferenceUtilities.getTasksFromSharedPrefs();
+        todoObervable = TodoObervable.getInstance();
+        todoObervable.addObserver(this);
+        if (todoObervable.getTaskTodoList() == null && taskTodoList == null) {
+            retrofitCallOperation.getTasks();
+        } else if (taskTodoList != null) {
+            fillTask(taskTodoList);
+            todoObervable.setTaskTodoList(taskTodoList);
+        } else {
+            fillTask(todoObervable.getTaskTodoList());
+        }
     }
 }
