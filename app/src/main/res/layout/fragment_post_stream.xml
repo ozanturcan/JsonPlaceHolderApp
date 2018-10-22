@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment_post_stream"
-    android:orientation="horizontal"
-    android:background="@color/colorSecondaryLight">
-    <include
-        android:id="@+id/loading_album"
-        layout="@layout/loading_screen"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="@dimen/activity_horizontal_margin_half"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin_half"
-        />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_feed_post"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true">
-    </androidx.recyclerview.widget.RecyclerView>
-</LinearLayout>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fragment_post_stream"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/colorSecondaryLight"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/loading_album"
+            layout="@layout/loading_screen" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_feed_post"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</layout>

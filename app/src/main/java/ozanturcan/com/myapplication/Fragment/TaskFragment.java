@@ -29,7 +29,6 @@ public class TaskFragment extends BaseFragment implements Observer, TaskRVAdapte
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         rootView = inflater.inflate(R.layout.fragment_todo_stream, container, false);
         recyclerView = rootView.findViewById(R.id.recyclerview_feed_todo);
         rootView.findViewById(R.id.loading_album).setVisibility(View.VISIBLE);

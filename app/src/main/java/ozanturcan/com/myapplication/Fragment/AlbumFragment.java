@@ -44,7 +44,7 @@ public class AlbumFragment extends BaseFragment implements Observer {
     public void update(Observable observable, Object o) {
         if (observable != null && observable instanceof AlbumObservable) {
             /* Typecast to UserRepository */
-            fillAlbums(rootView.getContext(), albumObservable);
+            fillAlbums(albumObservable);
 
         }
     }
@@ -57,12 +57,12 @@ public class AlbumFragment extends BaseFragment implements Observer {
         }
     }
 
-    private void fillAlbums(final Context context, AlbumObservable lstAlbum) {
+    private void fillAlbums(AlbumObservable lstAlbum) {
         recyclerViewAlbum.setAdapter(rvAdapter);
         rvAdapter = new AlbumRVAdapter(lstAlbum.getAlbumList(), new CustomItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                Toast.makeText(context, "Clicked Item: " + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Clicked Item: " + position, Toast.LENGTH_SHORT).show();
                 retrofitCallOperation.getPhotoListFromAlbum(albumObservable.getAlbumList().get(position).getId().toString());
                 PhotoFragment photoFragment = new PhotoFragment();
                 FragmentTransaction transaction  = getFragmentManager().beginTransaction();
@@ -80,7 +80,7 @@ public class AlbumFragment extends BaseFragment implements Observer {
         if (albumObservable.getAlbumList() == null) {
             retrofitCallOperation.getAlbums();
         }else{
-            fillAlbums(getContext(),albumObservable);
+            fillAlbums(albumObservable);
         }
     }
 

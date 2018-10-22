@@ -44,7 +44,7 @@ public class PostRVAdapter extends RecyclerView.Adapter<PostRVAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.photo_title_id.setText(postList.get(position).getTitle());
-        holder.textBoxTextViewCount.setText(postList.get(position).getCommentCount().toString());
+        //holder.textBoxTextViewCount.setText(postList.get(position).getCommentCount().toString());
         holder.textView_username.setText(postList.get(position).getUserName());
         holder.textView_description.setText(postList.get(position).getBody());
     }

@@ -24,7 +24,7 @@ public class PhotoFragment extends BaseFragment implements Observer {
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_photo_stream, container, false);
-        rootView.findViewById(R.id.loading_album).setVisibility(View.VISIBLE);
+//        rootView.findViewById(R.id.loading_album).setVisibility(View.VISIBLE);
         recyclerviewFeed = (RecyclerView) rootView.findViewById(R.id.recyclerview_feed_photo);
         recyclerviewFeed.setLayoutManager(new GridLayoutManager(rootView.getContext(), 1));
         photosObservable = PhotosObservable.getInstance();
@@ -35,7 +35,7 @@ public class PhotoFragment extends BaseFragment implements Observer {
     public void fillAlbums( PhotosObservable lstPhoto) {
         recyclerViewAdapter = new PhotoRVAdapter( lstPhoto.getPhotoList());
         recyclerviewFeed.setAdapter(recyclerViewAdapter);
-        rootView.findViewById(R.id.loading_album).setVisibility(View.GONE);
+       // rootView.findViewById(R.id.loading_album).setVisibility(View.GONE);
         photosObservable.deleteObserver(this);
 
     }

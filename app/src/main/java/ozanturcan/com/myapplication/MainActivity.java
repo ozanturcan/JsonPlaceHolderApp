@@ -1,6 +1,7 @@
 package ozanturcan.com.myapplication;
 
 
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 
@@ -15,7 +16,6 @@ import ozanturcan.com.myapplication.Network.RetrofitCallOperation;
 public class MainActivity extends AppCompatActivity {
 
     private BottomTabLayout bottomTabLayout;
-    private int container;
     private RetrofitCallOperation retrofitCallOperation = new RetrofitCallOperation();
 
     @Override
@@ -29,27 +29,26 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void switchFragment(int id) {
-        final FragmentTransaction transaction  = getFragmentManager().beginTransaction();
-
         switch (id) {
             case R.id.menu_button1:
-                transaction.replace(R.id.container, new AlbumFragment()).commit();
-                transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
-                getSupportActionBar().setTitle("Albums");
+                replaceFragment(new AlbumFragment(), "Albums");
                 break;
             case R.id.menu_button2:
-                transaction.replace(R.id.container, new PostFragment()).commit();
-                transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
-                getSupportActionBar().setTitle("Posts");
+                replaceFragment(new PostFragment(), "Posts");
                 break;
             case R.id.menu_button3:
-                transaction.replace(R.id.container, new TaskFragment()).commit();
-                transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
-                getSupportActionBar().setTitle("Todos");
+                replaceFragment(new TaskFragment(), "Todos");
                 break;
-
         }
     }
+
+    public void replaceFragment(Fragment fragment, String title){
+        final FragmentTransaction transaction  = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment).commit();
+        transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
+        getSupportActionBar().setTitle(title);
+    }
+
     public void setBottomTabLayout(){
         // Setup button tab layout
         bottomTabLayout = (BottomTabLayout) findViewById(R.id.bottomTabLayout);

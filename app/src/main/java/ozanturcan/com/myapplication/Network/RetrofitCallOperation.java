@@ -3,18 +3,22 @@ package ozanturcan.com.myapplication.Network;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import io.reactivex.Scheduler;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import ozanturcan.com.myapplication.Modal.Album;
 import ozanturcan.com.myapplication.Modal.Comment;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.AlbumObservable;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.CommentObservable;
-import ozanturcan.com.myapplication.Modal.ObservableObjects.TodoObervable;
-import ozanturcan.com.myapplication.Modal.Photo;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.PhotosObservable;
-import ozanturcan.com.myapplication.Modal.Post;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.PostObservable;
+import ozanturcan.com.myapplication.Modal.ObservableObjects.TodoObervable;
+import ozanturcan.com.myapplication.Modal.ObservableObjects.UserObservable;
+import ozanturcan.com.myapplication.Modal.Photo;
+import ozanturcan.com.myapplication.Modal.Post;
 import ozanturcan.com.myapplication.Modal.TaskTodo;
 import ozanturcan.com.myapplication.Modal.User;
-import ozanturcan.com.myapplication.Modal.ObservableObjects.UserObservable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -67,22 +71,10 @@ public class RetrofitCallOperation {
         });
     }
 
-    public void getPost() {
-
-        Call<List<Post>> call = service.GetAllPosts();
-        call.enqueue(new Callback<List<Post>>() {
-            @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                if (checkResponse(response)) {
-                    postObservable.setPostList(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
-//                Toast.makeText(getContext(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-            }
-        });
+    public Single<List<Post>> getPost() {
+        return service.GetAllPosts()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     public void getUser() {

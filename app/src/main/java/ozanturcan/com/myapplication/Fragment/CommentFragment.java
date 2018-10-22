@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import ozanturcan.com.myapplication.Adapter.CommentRVAdapter;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.CommentObservable;
+import ozanturcan.com.myapplication.Modal.Post;
 import ozanturcan.com.myapplication.R;
 import ozanturcan.com.myapplication.Util.StringUtilities;
 
@@ -25,6 +26,17 @@ public class CommentFragment extends BaseFragment implements Observer {
     private TextView textViewCount;
     private TextView textViewBody;
     private TextView textViewTitle;
+
+    public static CommentFragment newInstance(Post post) {
+        CommentFragment fragment = new CommentFragment();
+        Bundle args = new Bundle();
+        args.putString("Body", post.getBody());
+        args.putString("CommentCount", post.getCommentCount().toString());
+        args.putString("Title", post.getTitle());
+        args.putString("Username", post.getUserName());
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

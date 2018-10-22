@@ -2,6 +2,9 @@ package ozanturcan.com.myapplication.Network;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import ozanturcan.com.myapplication.Modal.Album;
 import ozanturcan.com.myapplication.Modal.Comment;
 import ozanturcan.com.myapplication.Modal.Photo;
@@ -18,7 +21,7 @@ public interface JSONPlaceholderApi {
     ///Post Servises
 
     @GET("posts")
-    Call<List<Post>> GetAllPosts();
+    Single<List<Post>> GetAllPosts();
 
     @GET("posts/{postID}")
     Call<Post> getSelectedPost(@Path("postID") String postID);
