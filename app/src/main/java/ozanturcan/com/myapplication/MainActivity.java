@@ -8,10 +8,10 @@ import android.os.Bundle;
 import com.stfalcon.bottomtablayout.BottomTabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import ozanturcan.com.myapplication.Fragment.AlbumFragment;
-import ozanturcan.com.myapplication.Fragment.PostFragment;
-import ozanturcan.com.myapplication.Fragment.TaskFragment;
-import ozanturcan.com.myapplication.Network.RetrofitCallOperation;
+import ozanturcan.com.myapplication.fragment.AlbumFragment;
+import ozanturcan.com.myapplication.fragment.PostFragment;
+import ozanturcan.com.myapplication.fragment.TaskFragment;
+import ozanturcan.com.myapplication.network.RetrofitCallOperation;
 
 public class MainActivity extends AppCompatActivity {
 

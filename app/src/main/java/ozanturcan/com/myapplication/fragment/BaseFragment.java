@@ -1,4 +1,4 @@
-package ozanturcan.com.myapplication.Fragment;
+package ozanturcan.com.myapplication.fragment;
 
 import android.app.Fragment;
 import android.content.Context;

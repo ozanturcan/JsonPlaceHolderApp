@@ -1,18 +1,17 @@
-package ozanturcan.com.myapplication.Network;
+package ozanturcan.com.myapplication.network;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import io.reactivex.Scheduler;
-import io.reactivex.Single;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import ozanturcan.com.myapplication.fragment.PostsViewState;
 import ozanturcan.com.myapplication.Modal.Album;
 import ozanturcan.com.myapplication.Modal.Comment;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.AlbumObservable;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.CommentObservable;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.PhotosObservable;
-import ozanturcan.com.myapplication.Modal.ObservableObjects.PostObservable;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.TodoObervable;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.UserObservable;
 import ozanturcan.com.myapplication.Modal.Photo;
@@ -27,10 +26,10 @@ public class RetrofitCallOperation {
     private JSONPlaceholderApi service = JsonPlaceholderClient.getRetrofitBase().create(JSONPlaceholderApi.class);
     AlbumObservable albumOperation = AlbumObservable.getInstance();
     PhotosObservable photosObservable = PhotosObservable.getInstance();
-    PostObservable postObservable = PostObservable.getInstance();
     UserObservable userObservable = UserObservable.getInstance();
     CommentObservable commentObservable = CommentObservable.getInstance();
     TodoObervable todoObervable = TodoObervable.getInstance();
+
     private void getPhoto() {
         Call<List<Photo>> call = service.GetAllPhotos();
         call.enqueue(new Callback<List<Photo>>() {
@@ -71,8 +70,14 @@ public class RetrofitCallOperation {
         });
     }
 
-    public Single<List<Post>> getPost() {
-        return service.GetAllPosts()
+    public Observable<PostsViewState> getPost() {
+        return Observable.just((Resource<List<Post>>) Resource.loading())
+                .concatWith(service
+                        .GetAllPosts()
+                        .map(Resource::succes)
+                        .onErrorReturn(Resource::error)
+                        .toObservable())
+                .map(PostsViewState::new)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

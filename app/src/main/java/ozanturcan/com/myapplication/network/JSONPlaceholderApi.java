@@ -1,9 +1,7 @@
-package ozanturcan.com.myapplication.Network;
+package ozanturcan.com.myapplication.network;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import ozanturcan.com.myapplication.Modal.Album;
 import ozanturcan.com.myapplication.Modal.Comment;

@@ -1,7 +1,6 @@
-package ozanturcan.com.myapplication.Fragment;
+package ozanturcan.com.myapplication.fragment;
 
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import ozanturcan.com.myapplication.Adapter.AlbumRVAdapter;
 import ozanturcan.com.myapplication.Listener.CustomItemClickListener;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.AlbumObservable;
-import ozanturcan.com.myapplication.Network.RetrofitCallOperation;
+import ozanturcan.com.myapplication.network.RetrofitCallOperation;
 import ozanturcan.com.myapplication.R;
 
 public class AlbumFragment extends BaseFragment implements Observer {

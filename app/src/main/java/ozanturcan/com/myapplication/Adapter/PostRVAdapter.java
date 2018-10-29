@@ -5,13 +5,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import ozanturcan.com.myapplication.Listener.CustomItemClickListener;
 import ozanturcan.com.myapplication.Modal.Post;
 import ozanturcan.com.myapplication.R;
-import ozanturcan.com.myapplication.Listener.CustomItemClickListener;
 
 /**
  * Created by Legend on 10.05.2018.
@@ -21,9 +22,19 @@ public class PostRVAdapter extends RecyclerView.Adapter<PostRVAdapter.ViewHolder
     CustomItemClickListener listener;
     private List<Post> postList;
 
-    public PostRVAdapter(List<Post> postList, CustomItemClickListener listener) {
-        this.postList = postList;
+    public PostRVAdapter() {
+        this.postList = new ArrayList<>();
+    }
+
+    public void setListener(CustomItemClickListener listener) {
         this.listener = listener;
+    }
+
+    public void setPostList(List<Post> postList) {
+        if (postList == null) return;
+        this.postList.clear();
+        this.postList.addAll(postList);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -32,9 +43,8 @@ public class PostRVAdapter extends RecyclerView.Adapter<PostRVAdapter.ViewHolder
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item_holder_post, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        view.setOnClickListener(v -> {
+            if (listener != null) {
                 listener.onItemClick(v, viewHolder.getAdapterPosition());
             }
         });

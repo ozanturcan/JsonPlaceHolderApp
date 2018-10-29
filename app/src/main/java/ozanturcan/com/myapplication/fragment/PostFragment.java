@@ -1,4 +1,4 @@
-package ozanturcan.com.myapplication.Fragment;
+package ozanturcan.com.myapplication.fragment;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -6,15 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
-
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import io.reactivex.disposables.Disposable;
 import ozanturcan.com.myapplication.Adapter.PostRVAdapter;
 import ozanturcan.com.myapplication.Modal.Post;
-import ozanturcan.com.myapplication.Network.RetrofitCallOperation;
 import ozanturcan.com.myapplication.R;
 import ozanturcan.com.myapplication.databinding.FragmentPostStreamBinding;
+import ozanturcan.com.myapplication.network.RetrofitCallOperation;
 
 public class PostFragment extends BaseFragment {
     private PostRVAdapter recyclerViewAdapter;
@@ -28,25 +27,21 @@ public class PostFragment extends BaseFragment {
                              Bundle savedInstanceState) {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_stream, container, false);
-        binding.loadingAlbum.setVisibility(View.VISIBLE);
-        checkConnection();
         return binding.getRoot();
     }
 
     @Override
-    public void checkConnection() {
-        super.checkConnection();
-        if (isOnline()){
-            postDisposable = retrofitCallOperation
-                    .getPost()
-                    .subscribe((posts, throwable) -> fillPost(posts));
-        }
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        recyclerViewAdapter = new PostRVAdapter();
+        recyclerViewAdapter.setListener((v, position) -> { });
+        binding.recyclerviewFeedPost.setAdapter(recyclerViewAdapter);
     }
 
-    public void fillPost(List<Post> posts) {
-        recyclerViewAdapter = new PostRVAdapter(posts, (v, position) -> initializeCommentFragment(posts.get(position)));
-        binding.recyclerviewFeedPost.setAdapter(recyclerViewAdapter);
-        binding.loadingAlbum.setVisibility(View.GONE);
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        postDisposable = retrofitCallOperation.getPost().subscribe(binding::setViewState);
     }
 
     @Override
@@ -57,7 +52,7 @@ public class PostFragment extends BaseFragment {
         }
     }
 
-    private void initializeCommentFragment(Post post){
+    private void initializeCommentFragment(Post post) {
         CommentFragment commentFragment = CommentFragment.newInstance(post);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         retrofitCallOperation.getCommentListFromPost(post.getId().toString());

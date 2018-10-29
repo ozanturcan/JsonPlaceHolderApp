@@ -1,4 +1,4 @@
-package ozanturcan.com.myapplication.Fragment;
+package ozanturcan.com.myapplication.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import ozanturcan.com.myapplication.Adapter.TaskRVAdapter;
 import ozanturcan.com.myapplication.Modal.ObservableObjects.TodoObervable;
 import ozanturcan.com.myapplication.Modal.TaskTodo;
-import ozanturcan.com.myapplication.Network.RetrofitCallOperation;
+import ozanturcan.com.myapplication.network.RetrofitCallOperation;
 import ozanturcan.com.myapplication.R;
 import ozanturcan.com.myapplication.Util.SharedPreferenceUtilities;
 

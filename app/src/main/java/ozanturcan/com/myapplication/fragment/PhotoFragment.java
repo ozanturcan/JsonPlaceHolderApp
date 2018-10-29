@@ -1,4 +1,4 @@
-package ozanturcan.com.myapplication.Fragment;
+package ozanturcan.com.myapplication.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
